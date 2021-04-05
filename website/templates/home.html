@@ -1,0 +1,54 @@
+{% extends "base.html" %}{% block title %}Home{% endblock %}
+
+{% block header %}
+<div class="jumbotron jumbotron-fluid" style="position: relative; background-color: #E54B4B; height: 100px">
+        
+    <div class="container">
+      <header style="position: relative; margin-top: -70px; text-align: center; color: #F7EBE8; font-family: Georgia; font-size: 100px">Gaiden</header>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div>
+    <h2 style="position: relative; text-align: center; color: #F7EBE8; font-family: Georgia; margin-top: 200px; font-size: 85px; text-shadow: 2px 2px 8px #111319;">Philosophy For All.</h2>
+  </div>
+  <section class="text-center">
+    <div class="container">
+      <p>
+        <a type="button" href="/explore" class="btn btn-outline-secondary" style="margin-top: 100px; color: #F7EBE8; font-size: 31px; border: 3px solid; border-color: #F7EBE8; border-radius: 100px;">Explore</a>
+        <a type="button" href="#" class="btn btn-outline-secondary" style="margin-top: 100px; color: #F7EBE8; font-size: 31px; border: 3px solid; border-color: #F7EBE8; border-radius: 100px;">About</a>
+      </p>
+    </div>
+  </section>
+  <section class="text-center">
+    <div class="container">
+      <div class="list-group">
+        <p class="list-group-item list-group-item-action" style="margin-top: 50px; background-color: #343746; padding: .2rem 1rem;"></p>
+      </div>
+    </div>
+  </section>
+  <section class="text-center" style="margin-top: 70px;">
+    <div class="container">
+      <style>
+        blockquote { 
+            animation: fadeInAnimation ease 4s; 
+            animation-iteration-count: 1; 
+            animation-fill-mode: forwards; 
+        } 
+        @keyframes fadeInAnimation { 
+            0% { 
+                opacity: 0; 
+            } 
+            100% { 
+                opacity: 1; 
+            } 
+        }
+      </style>
+      <blockquote class="blockquote">
+        <p style="color: #F7EBE8;" class="fade-in">{{ quote }}</p>
+        <footer class="blockquote-footer" class="fade-in" style="color: #F7EBE8;">{{ quote_author }}</footer>
+      </blockquote>
+    </div>
+  </section>
+{% endblock %}

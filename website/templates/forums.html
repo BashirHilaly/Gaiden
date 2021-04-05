@@ -1,0 +1,138 @@
+{% extends "base.html" %}{% block title %}Forums{% endblock %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg navbar-dark" style="font-family: Georgia; font-size: 50px; background-color: #E54B4B;">
+    <a class="navbar-brand" href="#">
+        <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+      </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="/forums">Forums<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/intro">Intro</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/">Concepts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/timeline">History</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/figures">Figures</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/">About</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/sign-up">Sign Up</a>
+        </li>
+        {% endif %}
+      </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<style>
+    .post-divider {
+        padding-left: 30px;
+        padding-right: 30px;
+        border-left: 3px solid #343746;
+        border-right: 3px solid #343746;
+        min-width: 600px;
+    }
+    .card {
+        border-radius: .90rem;
+        border: 1px solid rgba(0,0,0,100);
+        background-color: #E54B4B;
+        position: relative;
+        overflow-y: scroll;
+        height: 90px;
+        max-height: 600px;
+        min-width: 600px;
+    }
+    .card::-webkit-scrollbar {
+      display: none;
+    }
+    .card {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+</style>
+
+{% for post in Post %}
+  <section style="margin-top: 100px;">
+      <ul class="container-fluid" style="width: 90%; display: flex;">
+        <li class="row">
+          <div class="col" style="color: #F7EBE8; text-align: center;">
+              <div class="post-divider">
+                  <h2>{{ post.title }}</h2>
+                  <h5>{{ post.content }}</h5>
+                  <footer class="blockquote-footer">{{ post.user_id }}</footer>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card" id="comments">
+                  <div class="card-body">
+                    <div data-spy="scroll" data-target="#comments" data-offset="0" class="scrollspy-example" style="background-color: #EF8C8C; padding: 20px;">
+                      {% for comment in Comment %}
+                        {% if comment.post_id == post.id %}
+                          <h5 id="list-item-1" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: #444140;">{{ comment.user_id }}</h5>
+                          <p>{{ comment.content }}</p>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </li>
+      </ul>
+  </section>
+{% endfor %}
+
+
+<div class="position-fixed" style="position:absolute; bottom:5px; right:5px; margin:0; padding:25px;">
+  <div>
+    <button style="background-color: transparent; outline:none; border: 0; color: transparent; transition: none;"type="button" data-toggle="modal" data-target="#exampleModalCenter">
+      <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="#E54B4B" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<div id="exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="postTitle" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form method="POST">
+        <div class="modal-header">
+          <input class="form-control" name="postTitle" id="postTitle"></input>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <textarea name="body" id="body" class="form-control" rows="10" placeholder="Start writing here"></textarea>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

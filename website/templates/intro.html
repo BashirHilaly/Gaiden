@@ -1,0 +1,151 @@
+{% extends "base.html" %}{% block title %}Introduction{% endblock %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg navbar-dark" style="font-family: Georgia; font-size: 50px; background-color: #E54B4B;">
+    <a class="navbar-brand" href="#">
+        <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+      </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="/intro">Intro<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/">Concepts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/timeline">History</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/figures">Figures</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/forums">Forums</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/">About</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/sign-up">Sign Up</a>
+        </li>
+        {% endif %}
+      </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+<style>
+  .card-body {
+    font-size: 20px;
+  }
+  .lead {
+    font-size: 25px;
+    animation: fadeInAnimation ease 2s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+  }
+
+  @keyframes fadeInAnimation { 
+      0% { 
+          opacity: 0; 
+      } 
+      100% { 
+          opacity: 1; 
+      } 
+  }
+</style>
+
+<hr class="featurette-divider">
+<section class="container" style="margin-top: 60px; max-width: 1180px;">
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h1 class="featurette-heading" style="color: #E54B4B;">What is Philosophy?</h1>
+      <p class="lead" style="color: #F7EBE8; font-size: 25px;">Philosophy is the study of general and fundamental questions, such as those about reason, existence, knowledge, values, mind, and language.</p>
+    </div>
+  </div>
+  
+  <div class="card" style="background-color: transparent; border-color: transparent;">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn collapsed" style="border-color: transparent; transition: none; border: transparent; box-shadow: none; color: #F7EBE8;" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
+          More Information
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body" style="color: #F7EBE8;">
+        {{ overview }}
+      </div>
+    </div>
+  </div>
+  <hr class="featurette-divider">
+  <div class="row featurette" style="margin-top: 90px;">
+    <div class="col-md-7 order-md-2">
+      <h1 class="featurette-heading" style="color: #E54B4B;">Origins</h1>
+      <p class="lead" style="color: #F7EBE8;">Initially the term referred to any body of knowledge.[10] In this sense, philosophy is closely related to religion, mathematics, natural science, education, and politics.</p>
+    </div>
+      <div class="col-md-5 order-md-1">
+      </div>
+    </div>
+    
+    <div class="card" style="background-color: transparent; border-color: transparent; ">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn collapsed" style="border-color: transparent; transition: none; border: transparent; box-shadow: none; color: #F7EBE8; margin-left: 80%;" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            More Information
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body" style="color: #F7EBE8;">
+          {{ origins }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <hr class="featurette-divider">
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h1 class="featurette-heading" style="color: #E54B4B;">History</h1>
+      <p class="lead" style="color: #F7EBE8; font-size: 25px;">In one general sense, philosophy is associated with wisdom, intellectual culture, and a search for knowledge. In this sense, all cultures and literate societies ask philosophical questions, such as "how are we to live" and "what is the nature of reality." A broad and impartial conception of philosophy, then, finds a reasoned inquiry into such matters as reality, morality, and life in all world civilizations.[26]</p>
+    </div>
+  </div>
+  
+  <div class="card" style="background-color: transparent; border-color: transparent;">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn collapsed" style="border-color: transparent; transition: none; border: transparent; box-shadow: none; color: #F7EBE8;" data-toggle="collapse" data-target="#collapseThree" aria-controls="collapseThree">
+          More Information
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseThree" class="collapse hide" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body" style="color: #F7EBE8;">
+        {{ history }} 
+        For more historical information click <a style="color: #F7EBE8;" href="/timeline">here.</a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</section>
+{% endblock %}

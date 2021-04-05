@@ -1,0 +1,50 @@
+{% extends "base.html" %}{% block title %}Explore{% endblock %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg navbar-dark" style="font-family: Georgia; font-size: 50px; background-color: #E54B4B;">
+    <a class="navbar-brand" href="#">
+        <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+      </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/intro">Intro</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/">Concepts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/timeline">History</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/figures">Figures</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/forums">Forums</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/">About</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/sign-up">Sign Up</a>
+        </li>
+        {% endif %}
+      </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

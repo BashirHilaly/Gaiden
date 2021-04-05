@@ -1,0 +1,57 @@
+{% extends "base.html" %}{% block title %}Login{% endblock %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg navbar-dark" style="font-family: Georgia; font-size: 50px; background-color: #E54B4B;">
+    <a class="navbar-brand" href="#">
+        <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+      </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/login">Login<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/explore">Explore</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/sign-up">Sign Up</a>
+        </li>
+      </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+<section class="container">
+  <div>
+      <h2 style="position: relative; text-align: center; color: #F7EBE8; font-family: Georgia; margin-top: 150px; font-size: 60px; text-shadow: 2px 2px 8px #111319;">Login</h2>
+  </div>
+</section>
+<form method="POST" class="container">
+
+  <div class="form-group">
+    <label for="email" style="color: #F7EBE8;">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="password" style="color: #F7EBE8;">Password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+    <small id="passwordHelp" class="form-text text-muted">Do Not Share Your Password Please!</small>
+  </div>
+  <br />
+  <div class="text-center">
+      <button type="submit" class="btn btn-danger" style="color: #F7EBE8; background-color: #E54B4B; border-color: #E54B4B;">Login</button>
+  </div>
+</form>
+
+{% endblock %}

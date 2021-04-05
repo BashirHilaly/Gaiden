@@ -1,0 +1,131 @@
+{% extends "base.html" %}{% block title %}Figures{% endblock %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg navbar-dark" style="font-family: Georgia; font-size: 50px; background-color: #E54B4B;">
+    <a class="navbar-brand" href="#">
+        <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+      </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="/figures">Figures<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/">Concepts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/timeline">History</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/intro">Intro</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/forums">Forums</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/">About</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/sign-up">Sign Up</a>
+        </li>
+        {% endif %}
+      </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+<style>
+  /* List */
+  col {
+    counter-reset: index;  
+    padding: 0;
+    max-width: 1280px;
+  }
+
+  /* List element */
+  .item {
+    counter-increment: index; 
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    box-sizing: border-box;
+    font-size: 20px;
+    color: #F7EBE8;
+  }
+
+
+  /* Element counter */
+  .item::before {
+    content: counters(index, ".", decimal-leading-zero);
+    font-size: 1.5rem;
+    text-align: right;
+    font-weight: bold;
+    min-width: 50px;
+    padding-right: 12px;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+    align-self: flex-start;
+    background-image: linear-gradient(to bottom, aquamarine, orangered);
+    background-attachment: fixed;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+  /* Element separation */
+  .item + .item {
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+
+</style>
+
+
+<div class="container">
+{% if figure.image_address == "https://us.123rf.com/450wm/maralingstad/maralingstad1511/maralingstad151100818/47993368-vecteur-point-d-interrogation-sur-fond-sombre.jpg?ver=6" %}
+
+  <div>
+    <h2 style="position: relative; text-align: center; color: #F7EBE8; font-family: Georgia; font-size: 85px; text-shadow: 2px 2px 8px #111319;"> {{ figure.figure }} </h2>
+  </div>
+
+  <col>
+    {% for paragraph in paragraphs %}
+        <li class="item">{{ ', '.join(paragraph) }}</li>
+    {% endfor %}
+  </col>
+{% else %}
+
+    <style>
+      .card{
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 30px;
+      }
+    </style>
+    
+    <img class="card" src= {{ figure.image_address }}>
+
+    <div>
+      <h2 style="position: relative; text-align: center; color: #F7EBE8; font-family: Georgia; font-size: 85px; text-shadow: 2px 2px 8px #111319;"> {{ figure.figure }} </h2>
+    </div>
+
+    <col>
+      {% for paragraph in paragraphs %}
+        <li class="item">{{ ', '.join(paragraph) }}</li>
+      {% endfor %}
+    </col>
+  {% endif %}
+{% endblock %}
+</div>
