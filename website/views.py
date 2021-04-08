@@ -43,6 +43,10 @@ def home():
 
     return render_template("home.html",  user=current_user, quote=quote, quote_author=author)
 
+@views.route('/about')
+def about():
+    return render_template("about.html",  user=current_user)
+
 @views.route('/intro')
 def intro():
     return render_template("intro.html", user=current_user, overview=overview[0], origins=origins[0], history=history[0])
