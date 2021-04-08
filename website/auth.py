@@ -45,6 +45,7 @@ def sign_up():
         password = request.form.get('password')
 
         user = User.query.filter_by(email=email).first()
+
         if user:
             flash('Email already exists', category='error')
         elif len(username) < 3:
@@ -60,14 +61,15 @@ def sign_up():
             # Alert user
             pass
         elif user is None:
-            pass
-        else:
             new_user = User(email=email, password=generate_password_hash(password, method='sha256'), user_name=username)
             db.session.add(new_user)
             db.session.commit()
-            login_user(user, remember=True)
             flash("Account created!", category='success')
+            login_user(new_user, remember=True)
             return redirect(url_for('views.explore'))
+        else:
+            pass
+
 
 
     return render_template("sign_up.html", user=current_user)
