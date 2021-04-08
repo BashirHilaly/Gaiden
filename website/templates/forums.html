@@ -60,8 +60,8 @@
         background-color: #E54B4B;
         position: relative;
         overflow-y: scroll;
-        height: 90px;
-        max-height: 600px;
+        min-height: 200px;
+        max-height: 900px;
         min-width: 600px;
     }
     .card::-webkit-scrollbar {
@@ -82,16 +82,23 @@
               <div class="post-divider">
                   <h2>{{ post.title }}</h2>
                   <h5>{{ post.content }}</h5>
-                  <footer class="blockquote-footer">{{ post.user_id }}</footer>
+                  <footer class="blockquote-footer">{{ username }}</footer>
               </div>
           </div>
           <div class="col">
               <div class="card" id="comments">
                   <div class="card-body">
                     <div data-spy="scroll" data-target="#comments" data-offset="0" class="scrollspy-example" style="background-color: #EF8C8C; padding: 20px;">
+                      <form method="POST">
+                        <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                          <input type="hidden" id="post_id" name="post_id" value="{{ post.id }}" />
+                          <input type="text" class="form-control mr-3" placeholder="Add comment" name="comment" id="comment">
+                          <button class="btn btn-primary" type="submit" style="background-color: #1d212b; color: #F7EBE8;">Comment</button>
+                        </div>
+                      </form>
                       {% for comment in Comment %}
                         {% if comment.post_id == post.id %}
-                          <h5 id="list-item-1" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: #444140;">{{ comment.user_id }}</h5>
+                          <h5 id="list-item-1" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: #444140;">{{ username }}</h5>
                           <p>{{ comment.content }}</p>
                         {% endif %}
                       {% endfor %}

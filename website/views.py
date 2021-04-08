@@ -3,14 +3,15 @@ from flask_login import login_required, current_user
 from .models import Post, Comment, User, Figures
 from . import db
 from nltk.tokenize import sent_tokenize
-
 import os
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver import ActionChains
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
+
+
+#from selenium import webdriver
+#from webdriver_manager.chrome import ChromeDriverManager
+#from selenium.common.exceptions import NoSuchElementException
+#from selenium.webdriver import ActionChains
+#from selenium.webdriver.common.keys import Keys
+#from selenium.webdriver.common.by import By
 
 # quote setup
 import csv
@@ -47,6 +48,12 @@ def home():
 def about():
     return render_template("about.html",  user=current_user)
 
+
+@views.route('/concepts')
+def concepts():
+    return render_template('concepts.html', user=current_user)
+
+
 @views.route('/intro')
 def intro():
     return render_template("intro.html", user=current_user, overview=overview[0], origins=origins[0], history=history[0])
@@ -62,21 +69,40 @@ def forums():
         post_title = request.form.get('postTitle')
         post_body = request.form.get('body')
 
-        if len(post_title) <= 1:
-            flash("Title too small.", category='error') 
-        elif len(post_title) >= 150:
-            flash("Title too large", category='error')
-        elif len(post_body) <= 500:
-            flash("Body too small.", category='error')
-        elif len(post_body) >= 10000:
-            flash("Body too large.", category='error')
-        else:
-            new_post = Post(title=post_title, content=post_body, user_id=current_user.id)
-            db.session.add(new_post)
-            db.session.commit()
-            flash("Posted!", category='success')
+        comment = request.form.get('comment')
+        post = request.form.get('post_id')
 
-    return render_template("forums.html", user=current_user, Post=db.session.query(Post), Comment=db.session.query(Comment))
+
+        try:
+            if len(comment) >= 2:
+                new_comment = Comment(content=comment, post_id=post, user_id=current_user.id)
+                db.session.add(new_comment)
+                db.session.commit()
+                flash("Posted!", category='success')
+            else:
+                flash("Comment too short.", category='error')
+        except:
+            pass
+
+
+        try:
+            if len(post_title) <= 1:
+                flash("Title too small.", category='error') 
+            elif len(post_title) >= 150:
+                flash("Title too large", category='error')
+            elif len(post_body) <= 500:
+                flash("Body too small.", category='error')
+            elif len(post_body) >= 10000:
+                flash("Body too large.", category='error')
+            else:
+                new_post = Post(title=post_title, content=post_body, user_id=current_user.id)
+                db.session.add(new_post)
+                db.session.commit()
+                flash("Posted!", category='success')
+        except:
+            pass
+
+    return render_template("forums.html", user=current_user, Post=db.session.query(Post), Comment=db.session.query(Comment), username=current_user.user_name)
 
 
 @views.route('/figures')
@@ -102,6 +128,8 @@ def specific_figures(person):
 def timeline():
 
 
+    # Gets information on a list of philosophers
+    # Uncomment out commented imports
     """
     wikipedia = "https://en.wikipedia.org/wiki/List_of_philosophers_(I%E2%80%93Q)"
     driver = webdriver.Chrome(ChromeDriverManager().install())
