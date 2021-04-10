@@ -10,14 +10,27 @@
 {% endblock %}
 
 {% block content %}
+  <style>
+      .btn-dark-moon {
+      background: #141E30;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      color: #fff;
+      border: 3px solid #eee;
+      transition: .2s; 
+  }
+  .btn-dark-moon:hover{
+    transform: scale(1.1);
+  }
+  </style>
   <div>
     <h2 style="position: relative; text-align: center; color: #F7EBE8; font-family: Georgia; margin-top: 200px; font-size: 85px; text-shadow: 2px 2px 8px #111319;">Philosophy For All.</h2>
   </div>
   <section class="text-center">
     <div class="container">
       <p>
-        <a type="button" href="/intro" class="btn btn-outline-secondary" style="margin-top: 100px; color: #F7EBE8; font-size: 31px; border: 3px solid; border-color: #F7EBE8; border-radius: 100px;">Explore</a>
-        <a type="button" href="/about" class="btn btn-outline-secondary" style="margin-top: 100px; color: #F7EBE8; font-size: 31px; border: 3px solid; border-color: #F7EBE8; border-radius: 100px;">About</a>
+        <a type="button" href="/intro" class="btn btn-dark-moon" style="margin-right: 10px; margin-top: 100px; color: #F7EBE8; font-size: 31px;">Explore</a>
+        <a type="button" href="/about" class="btn btn-dark-moon" style="margin-left: 10px; margin-top: 100px; color: #F7EBE8; font-size: 31px;">About</a>
       </p>
     </div>
   </section>

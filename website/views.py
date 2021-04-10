@@ -58,9 +58,6 @@ def concepts():
 def intro():
     return render_template("intro.html", user=current_user, overview=overview[0], origins=origins[0], history=history[0])
 
-@views.route('/explore')
-def explore():
-    return render_template("explore.html", user=current_user)
 
 @views.route('/forums', methods=['GET', 'POST'])
 @login_required
@@ -71,6 +68,7 @@ def forums():
 
         comment = request.form.get('comment')
         post = request.form.get('post_id')
+
 
 
         try:
@@ -87,10 +85,10 @@ def forums():
 
         try:
             if len(post_title) <= 1:
-                flash("Title too small.", category='error') 
+                flash("Title too small.", category='error')
             elif len(post_title) >= 150:
                 flash("Title too large", category='error')
-            elif len(post_body) <= 500:
+            elif len(post_body) <= 150:
                 flash("Body too small.", category='error')
             elif len(post_body) >= 10000:
                 flash("Body too large.", category='error')
@@ -102,7 +100,8 @@ def forums():
         except:
             pass
 
-    return render_template("forums.html", user=current_user, Post=db.session.query(Post), Comment=db.session.query(Comment), username=current_user.user_name)
+
+    return render_template("forums.html", User=db.session.query(User), user=current_user, Post=db.session.query(Post), Comment=db.session.query(Comment))
 
 
 @views.route('/figures')
