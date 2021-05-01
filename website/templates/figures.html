@@ -421,7 +421,7 @@
     {% for card in Figures %}
     <a href="/figures/{{ card.figure }}">
       <figure class="card">
-        <img src= {{ card.image_address }}>
+        <img alt={{ card.figure }} src= {{ card.image_address }}>
         <figcaption>{{ card.figure }}</figcaption>
       </figure>
     {% endfor %}
