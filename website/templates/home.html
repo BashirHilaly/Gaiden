@@ -1,23 +1,28 @@
 {% extends "base.html" %}{% block title %}Home{% endblock %}
 
 {% block header %}
-<div class="jumbotron jumbotron-fluid" style="position: relative; background-color: #E54B4B; height: 100px">
-        
-    <div class="container">
-      <header style="position: relative; margin-top: -70px; text-align: center; color: #F7EBE8; font-family: Georgia; font-size: 100px">Gaiden</header>
-    </div>
+
+<div class="jumbotron jumbotron-fluid" style="padding-top: -5px; padding-bottom: 10px; position: relative; background-color: #E54B4B; height: 100px;">
+
+  <div class="container">
+     <a class="none" style="color: transparent !important;" href="/">
+        <header style="position: relative; margin-top: -70px; text-align: center; color: #F7EBE8; font-family: Georgia; font-size: 80px">Gaiden</header>
+    </a>
   </div>
+</div>
 {% endblock %}
 
 {% block content %}
   <style>
+    # @media screen and (-webkit-min-device-pixel-ratio:0) {
+    #safari { background-color:#FFF }
+    }
       .btn-dark-moon {
-      background: #141E30;  /* fallback for old browsers */
-      background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      color: #fff;
-      border: 3px solid #eee;
+      background: rgb(20, 30, 48);
+      color: #F7EBE8;
+      border: 3px solid #F7EBE8;
       transition: .2s; 
+      border-radius: 100px;
   }
   .btn-dark-moon:hover{
     transform: scale(1.1);

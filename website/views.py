@@ -4,8 +4,11 @@ from .models import Post, Comment, User, Figures
 from . import db
 from nltk.tokenize import sent_tokenize
 import os
+from flask import send_from_directory
 
 
+
+# Uncomment below for figure downloads
 #from selenium import webdriver
 #from webdriver_manager.chrome import ChromeDriverManager
 #from selenium.common.exceptions import NoSuchElementException
@@ -38,7 +41,6 @@ def home():
 
     quote_index = random.randint(0, 24999)
 
-    # TODO change this repo to this project's PATH
     quote = random_line('website/quote_library/quotes.csv', quote_index)
     author = random_line('website/quote_library/authors.csv', quote_index)
 
@@ -104,9 +106,26 @@ def forums():
     return render_template("forums.html", User=db.session.query(User), user=current_user, Post=db.session.query(Post), Comment=db.session.query(Comment))
 
 
-@views.route('/figures')
+@views.route('/figures', methods=['GET', 'POST'])
 def figures():
-    return render_template("figures.html", user=current_user, Figures=db.session.query(Figures))
+
+    #initial list of figures
+    regular = db.session.query(Figures)
+
+    # if search goes through
+    if request.method == 'POST':
+
+        search = request.form.get('search')
+
+        if search != None:
+            # search for similar in body paragraphs of all figures
+            figures = db.session.query(Figures).filter(Figures.body.like('%' + search + '%')).all()
+            
+            # return new list order
+            return render_template("figures.html", user=current_user, Figures=figures)
+
+
+    return render_template("figures.html", user=current_user, Figures=regular)
 
 @views.route('/figures/<person>')
 def specific_figures(person):
@@ -115,6 +134,7 @@ def specific_figures(person):
     text = figure.body
     body = sent_tokenize(text)
 
+    # Splits body of text into paragraphs for readability
     paragraphs = [body[i * 10:(i + 1) * 10] for i in range((len(body) + 10 - 1) // 10 )]
 
     
@@ -173,6 +193,10 @@ def timeline():
     grabInfo(wikipedia)
     """
 
-
-
     return render_template('timeline.html', user=current_user)
+
+# Favicon
+@views.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(views.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
