@@ -25,7 +25,7 @@ The big historical significance in the discovery of philosophical ideas is clear
 
 ### Figures
 
-This section contains a huge database of philosophical figures of history and present times. It goes in depth on explaining the work and overall life of each philosopher. There are *over 800* figures on this page alone!. In the future we are planning to include a search function where you can search for a figure by the time period, region, school, ideas, and of course names!
+This section contains a huge database of philosophical figures of history and present times. It goes in depth on explaining the work and overall life of each philosopher. There are *over 800* figures on this page alone!. In the future we are planning to include a search function where you can search for a figure by the time period, region, school, ideas, and of course names! (All info has been scraped from wikipedia)
 [link](http://bashiryyy.pythonanywhere.com/figures)
 
 
