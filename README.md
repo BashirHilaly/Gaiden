@@ -1,3 +1,9 @@
+<h6 align="center">بسم الله الرحمن الرحيم
+<br>In the name of Allah, Most Gracious, Most Merciful
+</h6>
+
+---
+
 # Gaiden
  
 A fun place to learn about and share philosophical ideas.
